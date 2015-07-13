@@ -7,11 +7,15 @@
 # test html page for verification that its all good
 
 # Usage:
-# $ ./make_sprite.sh class_name image_extension
+# $ ./make_sprite.sh path class_name image_extension
+
+set -euo pipefail
+IFS=$'\n\t'
 
 name='output'; # output will be placed in a folder named this
-classname=${1:-flag}"-sprite"
-ext="."${2:-png}; # the extension to iterate over for input files
+path="${1:-}"  # Path to flag images
+classname=${2:-flag}"-sprite"
+ext="."${3:-png}; # the extension to iterate over for input files
 
 css="$name/$classname.css";
 html="$name/test.html";
@@ -21,7 +25,7 @@ mkdir $name;
 touch $css $html;
 
 echo "Generating sprite file...";
-convert *$ext -append $name/$classname$ext;
+convert $path*$ext -append $name/$classname$ext;
 echo "Sprite complete! - Creating css & test output...";
 
 echo -e "<html>\n<head>\n\t<link rel=\"stylesheet\" href=\"`basename $css`\" />\n</head>\n<body>\n\t<h1>Sprite test page</h1>\n" >> $html
@@ -29,7 +33,7 @@ echo -e "<html>\n<head>\n\t<link rel=\"stylesheet\" href=\"`basename $css`\" />\
 echo -e ".$classname {\n\tbackground:url('$classname$ext') no-repeat top left; display:inline-block;\n}" >> $css;
 counter=0;
 offset=0;
-for file in *$ext
+for file in $path*$ext
 do
     width=`identify -format "%[fx:w]" "$file"`;
     height=`identify -format "%[fx:h]" "$file"`;
@@ -40,7 +44,7 @@ do
     echo -e "\twidth: ${width}px;" >> $css;
     echo -e "\theight: ${height}px;\n}" >> $css;
 
-    echo -e "<a href=\"#\" class=\"$classname $clean\"></a>\n" >> $html;
+    echo -e "<div style=\"display:inline-block;\"><div>$clean</div> <a href=\"#\" class=\"$classname $clean\"></a></div>\n" >> $html;
 
     let offset+=$height;
     let counter+=1;
