@@ -18,7 +18,7 @@ Make flag sprites effortlessly from a total of 260 flags.
   ```
 
 3. The files will be available in `output/`
-  - [See example output](example/test.html)
+  - [See example output](http://jacobburenstam.com/flag-sprite-maker/example/test.html)
 
 ## HTML Usage
 
