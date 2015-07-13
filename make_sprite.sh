@@ -44,7 +44,7 @@ do
     echo -e "\twidth: ${width}px;" >> $css;
     echo -e "\theight: ${height}px;\n}" >> $css;
 
-    echo -e "<div style=\"display:inline-block;\"><div>$clean</div> <a href=\"#\" class=\"$classname $clean\"></a></div>\n" >> $html;
+    echo -e "<div style=\"display:inline-block;width:100px;\"><div style=\"overflow-x:hidden;text-overflow:ellipsis;white-space:nowrap;\">$clean</div> <a href=\"#\" class=\"$classname $clean\"></a></div>\n" >> $html;
 
     let offset+=$height;
     let counter+=1;

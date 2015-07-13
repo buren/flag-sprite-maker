@@ -1,6 +1,6 @@
 # Flag Sprite Maker
 
-Make flag sprites effortlessly from a total of 261 flags.
+Make flag sprites effortlessly from a total of 260 flags.
 
 * Requires `imagemagick`:
   - OSX (using homebrew): `brew install imagemagick`
